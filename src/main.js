@@ -15,5 +15,20 @@ async function copyTemplateFiles(options) {
 }
 
 export async function createAwesomePackage(options) {
-  
+  const refinedOptions = {
+    ...options,
+    targetDirectory: options.targetDirectory || process.cwd()
+  };
+  const currentFilePath = import.meta.url;
+  const pathname = new URL(currentFilePath).pathname;
+  const templateDir = path.resolve(pathname, "../../template");
+
+  refinedOptions.templateDirectory = templateDir;
+
+  try {
+    await access(templateDir, fs.constants.R_OK);
+  } catch (error) {
+    console.error("%s Invalid template path", chalk.red.bold("ERROR"));
+    process.exit(1);
+  }
 }
