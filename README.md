@@ -7,6 +7,10 @@ When you need to create a new package, need to add a lot of boilerplate code, we
 
 You just write your own code 🔥
 
+# How to install
+
+`npm i -g create-awesome-package`
+
 <h1>How to use</h1>
 
 Go to your root of the package you want to build.
@@ -15,12 +19,17 @@ Then, Just run
 
 `create-awesome-package`
 
+
+OR also you can use `npx`
+
+`npx create-awesome-package` ( if you don't want to globally install it)
+
 and you are done!
 
 It will provide you the boilerplate you need to get started!
 
 
-----
+---- 
 
 Inspired from `create-react-app`
 
