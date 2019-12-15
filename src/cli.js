@@ -1,4 +1,5 @@
 import arg from "arg";
+import { createAwesomePackage } from "./main";
 
 const parseArgsIntoOptions = rawArgs => {
   const args = arg(
@@ -21,4 +22,6 @@ const parseArgsIntoOptions = rawArgs => {
 
 export async function cli(args) {
   const options = parseArgsIntoOptions(args);
+
+  await createAwesomePackage(options);
 }
