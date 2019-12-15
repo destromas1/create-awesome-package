@@ -31,4 +31,8 @@ export async function createAwesomePackage(options) {
     console.error("%s Invalid template path", chalk.red.bold("ERROR"));
     process.exit(1);
   }
+
+  await copyTemplateFiles(refinedOptions);
+
+  console.log("Now you create your awesome package!");
 }
