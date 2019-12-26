@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "your-awesome-package",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "rm -rf ./dist && npm run build:js",
+    "build:js": "webpack -p --progress --config ./webpack.config.js"
+  },
   "repository": {},
   "bugs": {},
   "homepage": "",
