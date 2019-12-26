@@ -2,7 +2,7 @@
   "name": "create-awesome-package",
   "version": "0.1.0",
   "description": "CLI to bootstrap your awesome package",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "bin": {
     "create-awesome-package": "bin/create-awesome-package"
   },
