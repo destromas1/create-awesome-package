@@ -20,7 +20,7 @@
     "url": "git+https://github.com/destromas1/create-awesome-package.git"
   },
   "author": "stalukdar <stalukdar@team.mobile.de>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/destromas1/create-awesome-package/issues"
   },
