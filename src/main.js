@@ -46,5 +46,8 @@ export async function createAwesomePackage(options) {
 
   await copyTemplateFiles(refinedOptions);
 
-  console.log("Now you create your awesome package!");
+  console.log("Now you can write code for your awesome package! 🚀");
+  console.log("RUN ---");
+  console.log("npm i");
+  console.log("To Build the package RUN - npm run build");
 }
