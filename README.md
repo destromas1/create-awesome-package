@@ -17,12 +17,13 @@ Go to your root of the package you want to build.
 
 Then, Just run
 
-`create-awesome-package`
+`create-awesome-package coolio`
+
 
 
 OR also you can use `npx`
 
-`npx create-awesome-package` ( if you don't want to globally install it)
+`npx create-awesome-package coolio` ( if you don't want to globally install it)
 
 and you are done!
 
