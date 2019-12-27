@@ -1,14 +1,27 @@
 import chalk from "chalk";
 import fs from "fs";
+import os from "os";
 import ncp from "ncp";
 import path from "path";
 import { promisify } from "util";
 
+import packageTmpl from "./package-template.json";
+
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
+
 async function copyTemplateFiles(options) {
-  console.log("options", options.templateDirectory, options.targetDirectory);
+  const packageJson = {
+    ...packageTmpl,
+    name: options.packageName
+  };
+
+  fs.writeFileSync(
+    path.join(options.targetDirectory, 'package.json'),
+    JSON.stringify(packageJson, null, 2) + os.EOL
+  );
+
   return copy(options.templateDirectory, options.targetDirectory, {
     clobber: false
   });
