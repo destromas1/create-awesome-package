@@ -10,17 +10,16 @@ import packageTmpl from "./package-template.json";
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
-
-async function copyTemplateFiles(options) {
+async function writePackageFile(options) {
   const packageJson = {
     ...packageTmpl,
     name: options.packageName
   };
+  fs.writeFileSync(path.join(options.targetDirectory, 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
+}
 
-  fs.writeFileSync(
-    path.join(options.targetDirectory, 'package.json'),
-    JSON.stringify(packageJson, null, 2) + os.EOL
-  );
+async function copyTemplateFiles(options) {
+  await writePackageFile(options);
 
   return copy(options.templateDirectory, options.targetDirectory, {
     clobber: false
