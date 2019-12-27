@@ -16,7 +16,8 @@ const parseArgsIntoOptions = rawArgs => {
 
   return {
     skipPrompts: args["--yes"] || false,
-    template: args._[0]
+    packageName: args._[0],
+    // template: args._[0]
   };
 };
 
