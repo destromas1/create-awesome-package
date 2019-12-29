@@ -29,6 +29,9 @@ and you are done!
 
 It will provide you the boilerplate you need to get started!
 
+<h2>To Run Tests</h2>
+
+`npm run test`
 
 ---- 
 
