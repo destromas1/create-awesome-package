@@ -1,5 +1,6 @@
-const doSomethingAwesome = () => {
-  console.log("Write code for your awesome package");
+const doSomethingAwesomeAddition = (a, b) => {
+  const sum = a + b;
+  return sum;
 };
 
-export default doSomethingAwesome;
+export default doSomethingAwesomeAddition;
