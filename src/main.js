@@ -4,15 +4,18 @@ import os from "os";
 import ncp from "ncp";
 import path from "path";
 import { promisify } from "util";
+import { TemplateEnum } from "./constants.js";
 
-import packageTmpl from "./package-template.json";
+import packageJsTmpl from "./package-templates/package-js-tmpl.json";
+import packageTsTmpl from "./package-templates/package-ts-tmpl.json";
+
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
 async function writePackageFile(options) {
   const packageJson = {
-    ...packageTmpl,
+    ...(options.template === TemplateEnum.JS ? packageJsTmpl : packageTsTmpl),
     name: options.packageName
   };
   fs.writeFileSync(path.join(options.targetDirectory, 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
@@ -33,7 +36,8 @@ export async function createAwesomePackage(options) {
   };
   const currentFilePath = import.meta.url;
   const pathname = new URL(currentFilePath).pathname;
-  const templateDir = path.resolve(pathname, "../../template");
+
+  const templateDir = path.resolve(pathname, `../../templates/${options.template}`);
 
   refinedOptions.templateDirectory = templateDir;
 
