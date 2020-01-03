@@ -1,4 +1,4 @@
-const doSomethingAwesome = (a, b) => {
+const doSomethingAwesome = (a: number, b: number) => {
   const sum = a + b;
   return sum;
 };
