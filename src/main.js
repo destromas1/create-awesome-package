@@ -37,7 +37,11 @@ export async function createAwesomePackage(options) {
   const currentFilePath = import.meta.url;
   const pathname = new URL(currentFilePath).pathname;
 
+  console.log("Bootstrapping package for", options.template);
+
   const templateDir = path.resolve(pathname, `../../templates/${options.template}`);
+
+  console.log("Using template Directory :", templateDir);
 
   refinedOptions.templateDirectory = templateDir;
 
