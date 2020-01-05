@@ -3,7 +3,13 @@
 
 When you need to create a new package, need to add a lot of boilerplate code, webpack or other build system to transpile to ES5 etc.
 
+This CLI helps to create the package with JS/TS, build system(Webpack/Parcel) and necessary stuff 🔥
+It's like create-react-app but for building packages 📦
+
+
 `create-awesome-package` helps to create the package with build system and necessary stuff.
+
+### You can create package with JavaScript/TypeScript
 
 You just write your own code 🔥
 
