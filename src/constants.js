@@ -1,6 +1,11 @@
+export const TemplateMapper = {
+  JavaScript: "js",
+  TypeScript: "ts"
+};
+
 export const TemplateEnum = {
-  JS: "js",
-  TS: "ts"
+  JavaScript: "JavaScript",
+  TypeScript: "TypeScript"
 };
 
 export const templates = Object.values(TemplateEnum);
