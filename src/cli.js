@@ -18,17 +18,10 @@ const parseArgsIntoOptions = rawArgs => {
   // Q - ready to create your awesome package?
 
   const packageName = args._[0];
-  // const template = args._[1];
-
-  // if (!templates.includes(template)) {
-  //   console.error(chalk.red.bold("Template should be either 'js' or 'ts'"));
-  //   process.exit(1);
-  // }
 
   return {
     skipPrompts: args["--yes"] || false,
     packageName
-    // template
   };
 };
 
