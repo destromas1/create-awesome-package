@@ -2,7 +2,7 @@ import arg from "arg";
 import chalk from "chalk";
 import inquirer from "inquirer";
 import { createAwesomePackage } from "./main";
-import { TemplateEnum, TemplateMapper } from "./constants";
+import { TemplateEnum, TemplateMapper, BundlerEnum, BundlerMapper } from "./constants";
 
 const parseArgsIntoOptions = rawArgs => {
   const args = arg(
@@ -25,12 +25,12 @@ const parseArgsIntoOptions = rawArgs => {
   };
 };
 
-async function promptForTemplate(params) {
+async function promptForTemplate() {
   const answers = await inquirer.prompt([
     {
       type: "list",
       name: "template",
-      message: "Please select your Template language",
+      message: "Select your Template language",
       choices: [TemplateEnum.JavaScript, TemplateEnum.TypeScript]
     }
   ]);
@@ -40,14 +40,32 @@ async function promptForTemplate(params) {
   return mappedTemplate;
 }
 
+async function promptForBundler() {
+  const answers = await inquirer.prompt([
+    {
+      type: "list",
+      name: "bundler",
+      message: "Select your bundler",
+      choices: [BundlerEnum.Webpack, BundlerEnum.Parcel]
+    }
+  ]);
+
+  const mappedBundler = BundlerMapper[answers.bundler];
+
+  return mappedBundler;
+}
+
 export async function cli(args) {
+  // TODO refactor
   let options = parseArgsIntoOptions(args);
 
-  const template = await promptForTemplate(options);
+  const template = await promptForTemplate();
+  const bundler = await promptForBundler();
 
   options = {
     ...options,
-    template
+    template,
+    bundler
   };
 
   await createAwesomePackage(options);
