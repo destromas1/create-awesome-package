@@ -6,10 +6,6 @@ import path from "path";
 import { promisify } from "util";
 import { TemplateEnum } from "./constants.js";
 
-// import packageJsTmpl from "./package-templates/package-js-tmpl.json";
-// import packageTsTmpl from "./package-templates/package-ts-tmpl.json";
-
-
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
