@@ -6,23 +6,25 @@ import path from "path";
 import { promisify } from "util";
 import { TemplateEnum } from "./constants.js";
 
-import packageJsTmpl from "./package-templates/package-js-tmpl.json";
-import packageTsTmpl from "./package-templates/package-ts-tmpl.json";
+// import packageJsTmpl from "./package-templates/package-js-tmpl.json";
+// import packageTsTmpl from "./package-templates/package-ts-tmpl.json";
 
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
-async function writePackageFile(options) {
+async function writePackageFile(options, templateBundler) {
+  const packageTmpl = require(`./package-templates/package-${templateBundler}-tmpl.json`);
+
   const packageJson = {
-    ...(options.template === TemplateEnum.JS ? packageJsTmpl : packageTsTmpl),
+    ...packageTmpl,
     name: options.packageName
   };
   fs.writeFileSync(path.join(options.targetDirectory, 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
 }
 
-async function copyTemplateFiles(options) {
-  await writePackageFile(options);
+async function copyTemplateFiles(options, templateBundler) {
+  await writePackageFile(options, templateBundler);
 
   return copy(options.templateDirectory, options.targetDirectory, {
     clobber: false
@@ -39,7 +41,9 @@ export async function createAwesomePackage(options) {
 
   console.log("Bootstrapping package for", options.template);
 
-  const templateDir = path.resolve(pathname, `../../templates/${options.template}`);
+  const templateBundler = `${options.template}${options.bundler}`;
+
+  const templateDir = path.resolve(pathname, `../../templates/${templateBundler}`);
 
   console.log("Using template Directory :", templateDir);
 
@@ -52,7 +56,7 @@ export async function createAwesomePackage(options) {
     process.exit(1);
   }
 
-  await copyTemplateFiles(refinedOptions);
+  await copyTemplateFiles(refinedOptions, templateBundler);
 
   console.log("Now you can write code for your awesome package! 🚀");
   console.log("RUN ---");
