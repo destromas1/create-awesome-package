@@ -1,12 +1,12 @@
 {
-  "name": "your-awesome-package",
+  "name": "my-package",
   "version": "0.1.0",
   "description": "your-awesome-package",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "rm -rf ./dist && npm run build:js",
-    "build:js": "webpack -p --progress --config ./webpack.config.js"
+    "build:js": "parcel build index.js"
   },
   "repository": {},
   "bugs": {},
@@ -17,7 +17,6 @@
     "@babel/preset-env": "^7.7.6",
     "babel-loader": "^8.0.6",
     "jest": "^24.9.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "parcel-bundler": "^1.12.4"
   }
 }
