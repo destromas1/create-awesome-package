@@ -8,4 +8,14 @@ export const TemplateEnum = {
   TypeScript: "TypeScript"
 };
 
+export const BundlerMapper = {
+  Webpack: "w",
+  Parcel: "p"
+};
+
+export const BundlerEnum = {
+  Webpack: "Webpack",
+  Parcel: "Parcel"
+};
+
 export const templates = Object.values(TemplateEnum);
