@@ -1,12 +1,12 @@
 {
-  "name": "your-awesome-package",
+  "name": "my-package",
   "version": "0.1.0",
   "description": "your-awesome-package",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "jest",
-    "build": "rm -rf ./dist && npm run build:js",
-    "build:js": "webpack -p --progress --config ./webpack.config.js"
+    "build": "rm -rf ./dist && npm run build:ts",
+    "build:ts": "parcel build index.ts"
   },
   "repository": {},
   "bugs": {},
@@ -19,7 +19,6 @@
     "jest": "^24.9.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "parcel-bundler": "^1.12.4"
   }
 }
