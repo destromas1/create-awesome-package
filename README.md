@@ -23,20 +23,14 @@ Go to your root of the package you want to build.
 
 Then, Just run
 
-`create-awesome-package [name] [template]`
+`create-awesome-package [name]`
 
-Here `name` can be anything and template should be either `js` or `ts`
-
-`create-awesome-package my-package js`
-
-or
-
-`create-awesome-package my-package ts`
-
+example -
+`create-awesome-package my-package`
 
 OR also you can use `npx`
 
-`npx create-awesome-package my-package ts` ( if you don't want to globally install it)
+`npx create-awesome-package my-package` ( if you don't want to globally install it)
 
 and you are done!
 
