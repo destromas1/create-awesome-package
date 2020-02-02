@@ -25,3 +25,9 @@ const eslintPrettier = {
   }
 };
 
+export async function writeLintFile(options) {
+  fs.writeFileSync(
+    path.join(options.targetDirectory, ".eslintrc.json"),
+    JSON.stringify(eslintPrettier, null, 2) + os.EOL
+  );
+}
