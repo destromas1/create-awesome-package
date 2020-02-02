@@ -4,22 +4,46 @@ import os from "os";
 import ncp from "ncp";
 import path from "path";
 import { promisify } from "util";
-import { TemplateEnum } from "./constants.js";
+import { TemplateEnum, LinterEnum, LinterConfirmation } from "./constants.js";
+import { writeLintFile } from "./writeLintFile.js";
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
+
+const linterLibs = {
+  eslint: "^6.8.0",
+  "eslint-config-airbnb": "^18.0.1",
+  "eslint-config-prettier": "6.10.0",
+  "eslint-plugin-import": "^2.20.0",
+  "eslint-plugin-jsx-a11y": "^6.2.3",
+  "eslint-plugin-prettier": "3.1.2",
+  "eslint-plugin-react": "^7.18.1",
+  prettier: "1.19.1"
+};
 
 async function writePackageFile(options, templateBundler) {
   const packageTmpl = require(`./package-templates/package-${templateBundler}-tmpl.json`);
 
   const packageJson = {
     ...packageTmpl,
-    name: options.packageName
+    name: options.packageName,
+    devDependencies: {
+      ...packageTmpl.devDependencies,
+      ...(options.linter !== LinterConfirmation.No && linterLibs)
+    }
   };
-  fs.writeFileSync(path.join(options.targetDirectory, 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
+  fs.writeFileSync(
+    path.join(options.targetDirectory, "package.json"),
+    JSON.stringify(packageJson, null, 2) + os.EOL
+  );
 }
 
 async function copyTemplateFiles(options, templateBundler) {
+  console.log("options.linter", options.linter);
+
+  if (options.linter !== LinterConfirmation.No) {
+    await writeLintFile(options);
+  }
   await writePackageFile(options, templateBundler);
 
   return copy(options.templateDirectory, options.targetDirectory, {
@@ -39,7 +63,10 @@ export async function createAwesomePackage(options) {
 
   const templateBundler = `${options.template}${options.bundler}`;
 
-  const templateDir = path.resolve(pathname, `../../templates/${templateBundler}`);
+  const templateDir = path.resolve(
+    pathname,
+    `../../templates/${templateBundler}`
+  );
 
   console.log("Using template Directory :", templateDir);
 
