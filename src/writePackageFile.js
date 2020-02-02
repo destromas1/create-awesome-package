@@ -1,9 +1,7 @@
 import chalk from "chalk";
 import fs from "fs";
 import os from "os";
-import ncp from "ncp";
 import path from "path";
-import { promisify } from "util";
 
 const linterLibs = {
   eslint: "^6.8.0",

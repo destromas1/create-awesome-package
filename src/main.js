@@ -1,16 +1,14 @@
 import chalk from "chalk";
 import fs from "fs";
-import os from "os";
 import ncp from "ncp";
 import path from "path";
 import { promisify } from "util";
-import { TemplateEnum, LinterEnum, LinterConfirmation } from "./constants.js";
+import { LinterConfirmation } from "./constants.js";
 import { writeLintFile } from "./writeLintFile.js";
 import { writePackageFile } from "./writePackageFile.js";
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
-
 
 async function copyTemplateFiles(options, templateBundler) {
   console.log("options.linter", options.linter);
