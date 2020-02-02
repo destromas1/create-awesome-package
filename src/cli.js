@@ -2,7 +2,13 @@ import arg from "arg";
 import chalk from "chalk";
 import inquirer from "inquirer";
 import { createAwesomePackage } from "./main";
-import { TemplateEnum, TemplateMapper, BundlerEnum, BundlerMapper } from "./constants";
+import {
+  TemplateEnum,
+  TemplateMapper,
+  BundlerEnum,
+  BundlerMapper,
+  LinterConfirmation
+} from "./constants";
 
 const parseArgsIntoOptions = rawArgs => {
   const args = arg(
@@ -55,17 +61,32 @@ async function promptForBundler() {
   return mappedBundler;
 }
 
+async function promptForEslintPrettier() {
+  const answers = await inquirer.prompt([
+    {
+      type: "list",
+      name: "linter",
+      message: "Add Eslint and Prettier to your package",
+      choices: [LinterConfirmation.Yes, LinterConfirmation.No]
+    }
+  ]);
+
+  return answers.linter;
+}
+
 export async function cli(args) {
   // TODO refactor
   let options = parseArgsIntoOptions(args);
 
   const template = await promptForTemplate();
   const bundler = await promptForBundler();
+  const linter = await promptForEslintPrettier();
 
   options = {
     ...options,
     template,
-    bundler
+    bundler,
+    linter
   };
 
   await createAwesomePackage(options);
