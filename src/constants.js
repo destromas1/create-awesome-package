@@ -18,4 +18,16 @@ export const BundlerEnum = {
   Parcel: "Parcel"
 };
 
+export const LinterEnum = {
+  Eslint: "EsLint",
+  Prettier: "Prettier",
+  Both: "Both",
+  None: "None",
+};
+
+export const LinterConfirmation = {
+  Yes: "Yes",
+  No: "No"
+};
+
 export const templates = Object.values(TemplateEnum);
