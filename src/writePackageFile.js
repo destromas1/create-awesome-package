@@ -15,6 +15,11 @@ const linterLibs = {
   prettier: "1.19.1"
 };
 
+const lintScripts = {
+  "prettier": "./node_modules/.bin/prettier ./src/*.js --write",
+  "eslint": "./node_modules/.bin/eslint ./src/*.js"
+};
+
 export async function writePackageFile(options, templateBundler) {
   const packageTmpl = require(`./package-templates/package-${templateBundler}-tmpl.json`);
 
@@ -24,6 +29,10 @@ export async function writePackageFile(options, templateBundler) {
     devDependencies: {
       ...packageTmpl.devDependencies,
       ...(options.linter !== LinterConfirmation.No && linterLibs)
+    },
+    scripts: {
+      ...packageTmpl.scripts,
+      ...(options.linter !== LinterConfirmation.No && lintScripts)
     }
   };
   fs.writeFileSync(
