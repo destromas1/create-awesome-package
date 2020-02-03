@@ -1,25 +1,21 @@
 import chalk from "chalk";
 import fs from "fs";
-import os from "os";
 import ncp from "ncp";
 import path from "path";
 import { promisify } from "util";
-import { TemplateEnum } from "./constants.js";
+import { LinterConfirmation } from "./constants.js";
+import { writeLintFile } from "./writeLintFile.js";
+import { writePackageFile } from "./writePackageFile.js";
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
-async function writePackageFile(options, templateBundler) {
-  const packageTmpl = require(`./package-templates/package-${templateBundler}-tmpl.json`);
-
-  const packageJson = {
-    ...packageTmpl,
-    name: options.packageName
-  };
-  fs.writeFileSync(path.join(options.targetDirectory, 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
-}
-
 async function copyTemplateFiles(options, templateBundler) {
+  console.log("options.linter", options.linter);
+
+  if (options.linter !== LinterConfirmation.No) {
+    await writeLintFile(options);
+  }
   await writePackageFile(options, templateBundler);
 
   return copy(options.templateDirectory, options.targetDirectory, {
@@ -39,7 +35,10 @@ export async function createAwesomePackage(options) {
 
   const templateBundler = `${options.template}${options.bundler}`;
 
-  const templateDir = path.resolve(pathname, `../../templates/${templateBundler}`);
+  const templateDir = path.resolve(
+    pathname,
+    `../../templates/${templateBundler}`
+  );
 
   console.log("Using template Directory :", templateDir);
 
