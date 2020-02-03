@@ -2,6 +2,7 @@ import chalk from "chalk";
 import fs from "fs";
 import os from "os";
 import path from "path";
+import { LinterConfirmation } from "./constants.js";
 
 const linterLibs = {
   eslint: "^6.8.0",
